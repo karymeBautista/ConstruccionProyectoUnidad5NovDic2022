@@ -1,29 +1,28 @@
 package Tests;
 
+import java.io.File;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import Controller.JsonReader;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class JsonReaderTest {
 
+    String ruta = "C:\\Users\\Usuario\\Desktop\\CLON REPOSITORIOS\\RepoPruebasConstrucci-n\\Files\\employees.json";
+
     @Test
-    @DisplayName("Probando que la lectura del archivo JSON sea correcta")
-    public void leerArchivoJSON(){
-        JsonReader JsonReader = new JsonReader();
-        JsonReader.readJSON("files\\employees.json");
+    @DisplayName("Probando que el archivo JSON exista")
+    public void existenciaJSON() {
+        File archivo = new File(ruta);
+        assertTrue(archivo.exists());
     }
 
     @Test
-    @DisplayName("Probando que la lectura del archivo sea incorrecto por ser un archivo erroneo")
-    public void probandoConArchivoInvalido(){
-        JsonReader JsonReader = new JsonReader();
-        JsonReader.readJSON("files\\employees2.json");
-    }
-
-    @Test
-    @DisplayName("Probando que la lectura del archivo JSON sea incorrecta por inexistencia")
-    public void probandoSinArchivo(){
-        JsonReader JsonReader = new JsonReader();
-        JsonReader.readJSON("files\\employees3.json");
+    @DisplayName("Probando que la estructura del archivo JSON sea la correcta")
+    public void validacionJSON() {
+        
+        JsonReader ejemplo = new JsonReader();
+        String contenidojson = ejemplo.readJSON();
+        assertTrue(ejemplo.isValid(contenidojson));
     }
 }

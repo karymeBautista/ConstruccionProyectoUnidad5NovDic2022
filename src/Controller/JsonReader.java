@@ -1,44 +1,45 @@
 package Controller;
 
-import java.io.FileNotFoundException;
+import static org.junit.Assert.fail;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 
 public class JsonReader {
 
-    public JSONObject readJSON(String pathFile){
+    public String readJSON(){
 
-        //Creamos un objetoEmpleado que almacenara lo que se recupere del JSON
-        JSONObject empleados = new JSONObject();
+        JSONObject objetoJson = new JSONObject();
         JSONParser parser = new JSONParser();
+        
+        try (Reader reader = new FileReader("C:\\Users\\Usuario\\Desktop\\CLON REPOSITORIOS\\RepoPruebasConstrucci-n\\Files\\employees.json")){
+            
+            objetoJson = (JSONObject) parser.parse(reader);
 
-        try (Reader reader = new FileReader(pathFile)){
+        } catch (IOException | ParseException e){
+            fail("La lectura falló: " + e.getMessage());
+        } 
 
-            //Creamos un objeto que recupera el JSON
-            JSONObject objetoJSON = (JSONObject) parser.parse(reader);
-            //Asignamos a un objeto empleados lo que se recupera del JSON
-            empleados = (JSONObject) objetoJSON.get("employees");
-            //Asignamos a un Array a cada empleado que se recupera del JSON 
-            JSONArray employee = (JSONArray) empleados.get("employee");
-
-        } catch (FileNotFoundException e){
-            System.out.println("NO SE ENCONTRO EL ARCHIVO ESPECIFICADO");
-            System.out.println(e);
-        } catch (IOException e){
-            System.out.println(e);
-        } catch(ParseException e){
-            System.out.println("EL ARCHIVO NO TIENE EL FORMATO CORRECTO");
-            System.out.println(e);
-        }
-
-        return empleados;
+        return objetoJson.toString();
     }
 
-    
+    public boolean isValid(String json) {
+        
+        try {
+            JsonParser.parseString(json);
+            return true;
+        } catch (JsonSyntaxException e) {
+            fail("La validacion falló: " + e.getMessage());
+            return false;
+        }
+
+    }
+
+
 }
+
