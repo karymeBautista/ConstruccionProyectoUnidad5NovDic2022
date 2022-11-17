@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class JsonReaderTest {
 
-    String ruta = "C:\\Users\\Usuario\\Desktop\\CLON REPOSITORIOS\\RepoPruebasConstrucci-n\\Files\\employees.json";
+    String ruta = "C:\\Users\\Usuario\\Desktop\\CLON REPOSITORIOS\\ConstruccionProyectoUnidad5NovDic2022\\Files\\employees.json";
 
     @Test
     @DisplayName("Probando que el archivo JSON exista")

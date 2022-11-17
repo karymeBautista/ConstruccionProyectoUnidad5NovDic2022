@@ -17,7 +17,7 @@ public class JsonReader {
         JSONObject objetoJson = new JSONObject();
         JSONParser parser = new JSONParser();
         
-        try (Reader reader = new FileReader("C:\\Users\\Usuario\\Desktop\\CLON REPOSITORIOS\\RepoPruebasConstrucci-n\\Files\\employees.json")){
+        try (Reader reader = new FileReader("C:\\Users\\Usuario\\Desktop\\CLON REPOSITORIOS\\ConstruccionProyectoUnidad5NovDic2022\\Files\\employees.json")){
             
             objetoJson = (JSONObject) parser.parse(reader);
 
