@@ -1,4 +1,5 @@
-package Test;
+package test;
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -6,8 +7,8 @@ import java.io.IOException;
 
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-
-import Controller.validadorJSON;
+import main.backend.controllerJSON;
+import main.backend.validadorJSON;
 
 public class JSONReaderTest {
 
@@ -43,5 +44,20 @@ public class JSONReaderTest {
         assertFalse( jsonReader.validarAtributosJSON());
     }
 
+    @Test
+    @DisplayName("Probando que los empleados son leidos correctamente")
+    public void testLoadEmployees(){
+        
+        controllerJSON json=new controllerJSON(("C:\\Users\\karym\\Documents\\A-UNIVERSIDAD\\5to-semestre\\Construccion de SW\\ConstruccionProyectoUnidad3NovDic2022-development (1)\\ConstruccionProyectoUnidad3NovDic2022-development\\files\\empleados.json"));
+        assertEquals( 3, json.leerJSON().size());
+    }
+
+    @Test
+    @DisplayName("Probando actualizar un atributo")
+    public void probandoModficarJSON(){
+        controllerJSON jsonReader = new controllerJSON("C:\\Users\\karym\\Documents\\A-UNIVERSIDAD\\5to-semestre\\Construccion de SW\\ConstruccionProyectoUnidad3NovDic2022-development (1)\\ConstruccionProyectoUnidad3NovDic2022-development\\files\\empleados.json");
+
+        assertTrue( jsonReader.actualizarJSON(1, "firstName", "Karyme") );
+    }
 
 }
