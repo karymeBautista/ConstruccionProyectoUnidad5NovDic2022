@@ -1,4 +1,4 @@
-package main.backend;
+package Controller;
 import java.util.ArrayList;
 
 import com.google.gson.JsonArray;

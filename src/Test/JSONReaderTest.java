@@ -1,4 +1,4 @@
-package test;
+package Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -7,8 +7,9 @@ import java.io.IOException;
 
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-import main.backend.controllerJSON;
-import main.backend.validadorJSON;
+
+import Controller.validadorJSON;
+import Controller.controllerJSON;
 
 public class JSONReaderTest {
 

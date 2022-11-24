@@ -1,4 +1,4 @@
-package main.backend;
+package Controller;
 
 import java.util.ArrayList;
 
@@ -20,23 +20,32 @@ public class controllerJSON {
         setValidadorJSON(validadorJSON);
         return this;
     }
-  
+
     public controllerJSON(String pathFile) {
         this.pathFile = pathFile;
-        this.validadorJSON=new validadorJSON(pathFile);
+        this.validadorJSON = new validadorJSON(pathFile);
     }
 
     public ArrayList<JsonObject> leerJSON() {
         EmpleadoJSONParser empleadoJSONParser = new EmpleadoJSONParser();
         if (this.validadorJSON.esArchivoCorrectoJSON()) {
-           empleadoJSONParser.parseToEmpleados(this.validadorJSON.getJSONLeido());
+            empleadoJSONParser.parseToEmpleados(this.validadorJSON.getJSONLeido());
         } else {
-          return null;
-       }
+            return null;
+        }
 
         return empleadoJSONParser.getEmpleados();
-   }
+    }
 
+    public boolean actualizarJSON(int id, String nombreAtributo, String nuevoValor) {
+        ArrayList<JsonObject> listaEmp = leerJSON();
 
-    
+        listaEmp.get(id - 1).remove(nombreAtributo);
+        listaEmp.get(id - 1).addProperty(nombreAtributo, nuevoValor);
+        JSONFileCreator fileCreator = new JSONFileCreator();
+        fileCreator.createJSONFile(this.getValidadorJSON().getJSONLeido());
+        System.out.println(listaEmp.get(id - 1).get(nombreAtributo).getAsString());
+        return true;
+    }
+
 }
