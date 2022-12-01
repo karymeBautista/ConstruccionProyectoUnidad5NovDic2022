@@ -61,4 +61,12 @@ public class JSONReaderTest {
         assertTrue( jsonReader.actualizarJSON(1, "firstName", "Karyme") );
     }
 
+    @Test
+    @DisplayName("Probando eliminar elemento JSON")
+    public void probandoEliminarElementJSON(){
+        controllerJSON jsonReader = new controllerJSON("C:\\Users\\karym\\Documents\\A-UNIVERSIDAD\\5to-semestre\\Construccion de SW\\ConstruccionProyectoUnidad3NovDic2022-development (1)\\ConstruccionProyectoUnidad3NovDic2022-development\\files\\empleados.json");
+
+        assertTrue( jsonReader.eliminarEmpleado(1));
+    }
+
 }
