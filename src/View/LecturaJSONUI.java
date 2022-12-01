@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package main.frontend;
+package View;
 import java.awt.Image;
 import java.io.IOException;
 import java.net.URL;
@@ -10,15 +10,16 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import com.google.gson.JsonObject;
-import main.backend.EmpleadoJSONParser;
-import main.backend.controllerJSON;
+import Controller.EmpleadoJSONParser;
+import Controller.controllerJSON;
+import javax.swing.JOptionPane;
 
 public class LecturaJSONUI extends javax.swing.JFrame {
 
     EmpleadoJSONParser empleadoJSONParser = new EmpleadoJSONParser();
     ArrayList<JsonObject> empleados = new ArrayList<JsonObject>();
       
-    controllerJSON readJSON = new controllerJSON("C:\\Users\\Usuario\\Downloads\\ConstruccionProyecto\\ConstruccionProyectoUnidad3NovDic2022-development\\files\\empleados3.json");
+    controllerJSON readJSON = new controllerJSON("C:\\Users\\Usuario\\Desktop\\CLON REPOSITORIOS\\ConstruccionProyectoUnidad5NovDic2022\\Files\\empleados3.json");
 
     int paso = 0;
     int posicion=1;
@@ -54,6 +55,7 @@ public class LecturaJSONUI extends javax.swing.JFrame {
         jLabelfoto = new javax.swing.JLabel();
         jButtonSiguiente = new javax.swing.JButton();
         jButtonActualizar = new javax.swing.JButton();
+        jButtonEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,6 +109,15 @@ public class LecturaJSONUI extends javax.swing.JFrame {
             }
         });
 
+        jButtonEliminar.setBackground(new java.awt.Color(255, 153, 153));
+        jButtonEliminar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        jButtonEliminar.setText("Eliminar");
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -130,20 +141,19 @@ public class LecturaJSONUI extends javax.swing.JFrame {
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabelid)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(12, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonAnterior)
+                    .addComponent(jButtonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(jButtonAnterior)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonSiguiente))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(112, 112, 112)
-                        .addComponent(jButtonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButtonSiguiente)
+                    .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -170,7 +180,9 @@ public class LecturaJSONUI extends javax.swing.JFrame {
                     .addComponent(jButtonAnterior)
                     .addComponent(jButtonSiguiente))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jButtonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -180,7 +192,7 @@ public class LecturaJSONUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,6 +214,24 @@ public class LecturaJSONUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonActualizarActionPerformed
 
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        int ventanaYesNotCancel = JOptionPane.showConfirmDialog(null, "¿Realmente quieres eliminar al empleado con ID  " + posicion + " ?", "Ventana de Confirmacion", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+		//0=yes, 1=no, 2=cancel
+		if(ventanaYesNotCancel == 0) {
+            controllerJSON jsonReader = new controllerJSON("C:\\Users\\Usuario\\Desktop\\CLON REPOSITORIOS\\ConstruccionProyectoUnidad5NovDic2022\\Files\\empleados3.json");
+            jsonReader.eliminarEmpleado(posicion);
+		}else if(ventanaYesNotCancel == 1){
+		    System.out.println("Has indicado que no quieres proseguido con la operación");
+		}else if(ventanaYesNotCancel == 2){
+		    System.out.println("Has indicado que quieres cancelar la operación");
+		}
+
+        LecturaJSONUI lecturaJSONUI = new LecturaJSONUI();
+        lecturaJSONUI.iniciar();
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
+
     private void jButtonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonSiguienteActionPerformed
 
         jButtonAnterior.setEnabled(true);
@@ -209,6 +239,7 @@ public class LecturaJSONUI extends javax.swing.JFrame {
             readJSON.getValidadorJSON().esArchivoCorrectoJSON();
             empleadoJSONParser.parseToEmpleados( readJSON.getValidadorJSON().getJSONLeido() );
             empleados = empleadoJSONParser.getEmpleados();
+            
         }
 
         paso=paso+1;
@@ -216,10 +247,9 @@ public class LecturaJSONUI extends javax.swing.JFrame {
      
         if (paso == empleados.size()-1  ) {
             jButtonSiguiente.setEnabled(false);
-         //   paso = empleados.size();
-        }else{
-            
+            //paso = empleados.size()-1;
         }
+
         JsonObject empleado=empleados.get(paso);
         jLabelid.setText(String.valueOf(empleado.get("id").getAsString()));
         jLabelnombre.setText(empleado.get("firstName").getAsString());
@@ -278,9 +308,19 @@ public class LecturaJSONUI extends javax.swing.JFrame {
     public void iniciar() {
 
         if(empleados.size()==0){
+            
             readJSON.getValidadorJSON().esArchivoCorrectoJSON();
             empleadoJSONParser.parseToEmpleados( readJSON.getValidadorJSON().getJSONLeido() );
-            empleados = empleadoJSONParser.getEmpleados();   
+            empleados = empleadoJSONParser.getEmpleados();
+
+            if(empleados.size()==0){
+                System.exit( 0 );
+            }
+
+        }
+
+        if(empleados.size()==1){
+            jButtonSiguiente.setEnabled(false);
         }
 
         jLabelid.setText(String.valueOf(empleados.get(paso).get("id").getAsString()));
@@ -301,6 +341,8 @@ public class LecturaJSONUI extends javax.swing.JFrame {
         
         jLabelfoto.setIcon(new ImageIcon(imagen));
 
+        
+
     }
 
     /**
@@ -310,6 +352,7 @@ public class LecturaJSONUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActualizar;
     private javax.swing.JButton jButtonAnterior;
+    private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonSiguiente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
