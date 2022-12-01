@@ -18,7 +18,11 @@ public class LecturaJSONUI extends javax.swing.JFrame {
     EmpleadoJSONParser empleadoJSONParser = new EmpleadoJSONParser();
     ArrayList<JsonObject> empleados = new ArrayList<JsonObject>();
       
+<<<<<<< HEAD
     controllerJSON readJSON = new controllerJSON("C:\\Users\\karym\\Documents\\A-UNIVERSIDAD\\5to-semestre\\Construccion de SW\\development\\ConstruccionProyectoUnidad3NovDic2022-development\\files\\empleados3.json");
+=======
+    controllerJSON readJSON = new controllerJSON("C:\\Users\\Usuario\\Downloads\\ConstruccionProyecto\\ConstruccionProyectoUnidad3NovDic2022-development\\files\\empleados3.json");
+>>>>>>> 08893ab1fb30d35922cfe2845d9beda945b98872
 
     int paso = 0;
     int posicion=1;

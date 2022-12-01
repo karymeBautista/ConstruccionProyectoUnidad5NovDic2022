@@ -2,7 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+<<<<<<< HEAD
 package main.frontend;
+=======
+package view.frontend;
+>>>>>>> 08893ab1fb30d35922cfe2845d9beda945b98872
 import java.util.ArrayList;
 import com.google.gson.JsonObject;
 import main.backend.EmpleadoJSONParser;
@@ -193,9 +197,13 @@ public class Actualizar extends javax.swing.JFrame {
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         // TODO add your handling code here:
         //Actualizamos al segundo empleado
+<<<<<<< HEAD
         controllerJSON jsonReader = new controllerJSON("C:\\Users\\karym\\Documents\\A-UNIVERSIDAD\\5to-semestre\\Construccion de SW\\development\\ConstruccionProyectoUnidad3NovDic2022-development\\files\\empleados3.json");
 
         
+=======
+        controllerJSON jsonReader = new controllerJSON("C:\\Users\\Usuario\\Downloads\\ConstruccionProyecto\\ConstruccionProyectoUnidad3NovDic2022-development\\files\\empleados3.json");
+>>>>>>> 08893ab1fb30d35922cfe2845d9beda945b98872
 
         String nombreModificado = jTextFieldNombre.getText();
         String apellidoModificado = jTextFieldApellido.getText();
