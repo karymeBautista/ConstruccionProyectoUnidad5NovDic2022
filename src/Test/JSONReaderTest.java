@@ -1,5 +1,6 @@
 package Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -59,6 +60,28 @@ public class JSONReaderTest {
         controllerJSON jsonReader = new controllerJSON("C:\\Users\\karym\\Documents\\A-UNIVERSIDAD\\5to-semestre\\Construccion de SW\\ConstruccionProyectoUnidad3NovDic2022-development (1)\\ConstruccionProyectoUnidad3NovDic2022-development\\files\\empleados.json");
 
         assertTrue( jsonReader.actualizarJSON(1, "firstName", "Karyme") );
+    }
+
+    @Test
+    @DisplayName("Probando eliminar elemento JSON")
+    public void probandoEliminarElementJSON(){
+        controllerJSON jsonReader = new controllerJSON("C:\\Users\\lucyi\\Downloads\\AGREGARELEMENTO\\ConstruccionProyectoUnidad5NovDic2022\\Files\\empleados3.json");
+        jsonReader.leerJSON();
+        int tamanioInicial=jsonReader.getTamanioArray();
+        assertTrue( jsonReader.eliminarEmpleado(1));
+        int tamanioFinal=jsonReader.getTamanioArray();
+        assertEquals(tamanioInicial-1, tamanioFinal );
+    }
+
+    @Test
+    @DisplayName("Probando agregar elemento JSON")
+    public void probandoAgregarElementJSON(){
+        controllerJSON jsonReader = new controllerJSON("C:\\Users\\lucyi\\Downloads\\AGREGARELEMENTO\\ConstruccionProyectoUnidad5NovDic2022\\Files\\empleados3.json");
+        jsonReader.leerJSON();
+        int tamanioInicial=jsonReader.getTamanioArray();
+        assertTrue(jsonReader.agregarElemento(5, "Adam", "Sandler", "https://jsonformatter.org/img/Robert-Downey-Jr.jpg"));
+        int tamanioFinal=jsonReader.getTamanioArray();
+        assertEquals(tamanioInicial+1, tamanioFinal);
     }
 
 }

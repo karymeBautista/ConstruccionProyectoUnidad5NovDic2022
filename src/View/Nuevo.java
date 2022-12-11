@@ -4,19 +4,22 @@
  */
 package View;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
+import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Convert;
+
 import com.google.gson.JsonObject;
 import Controller.EmpleadoJSONParser;
 import Controller.controllerJSON;
 
-public class Actualizar extends javax.swing.JFrame {
+public class Nuevo extends javax.swing.JFrame {
 
     EmpleadoJSONParser empleadoJSONParser;
     ArrayList<JsonObject> empleados = new ArrayList<JsonObject>();
     int posicionArrayList;
 
-    public Actualizar(int posicionArrayList, ArrayList<JsonObject> empleados) {
-        this.posicionArrayList = posicionArrayList;
-        this.empleados= empleados;
+    public Nuevo() {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
@@ -47,6 +50,7 @@ public class Actualizar extends javax.swing.JFrame {
         jTextFieldUrl = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jTextFieldApellido = new javax.swing.JTextField();
+        jTextFieldID = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,7 +73,6 @@ public class Actualizar extends javax.swing.JFrame {
         jLabel2.setText("ID:");
 
         jLabelid.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 24)); // NOI18N
-        jLabelid.setText("1");
 
         jLabel4.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 24)); // NOI18N
         jLabel4.setText("Nombre:");
@@ -89,6 +92,11 @@ public class Actualizar extends javax.swing.JFrame {
         });
 
         jTextFieldNombre.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
+        jTextFieldNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNombreActionPerformed(evt);
+            }
+        });
 
         jTextFieldUrl.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
 
@@ -117,7 +125,9 @@ public class Actualizar extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabelid))))
+                                .addComponent(jLabelid)
+                                .addGap(68, 68, 68)
+                                .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabelUrl)
@@ -146,7 +156,8 @@ public class Actualizar extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jLabelid))
+                            .addComponent(jLabelid)
+                            .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -185,44 +196,41 @@ public class Actualizar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+    private void jTextFieldNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreActionPerformed
         // TODO add your handling code here:
-        cambiarSwing();
-    }//GEN-LAST:event_jButtonCancelarActionPerformed
+    }//GEN-LAST:event_jTextFieldNombreActionPerformed
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
         // TODO add your handling code here:
         //Actualizamos al segundo empleado
         controllerJSON jsonReader = new controllerJSON("C:\\Users\\lucyi\\Downloads\\AGREGARELEMENTO\\ConstruccionProyectoUnidad5NovDic2022\\Files\\empleados3.json");
 
-        String nombreModificado = jTextFieldNombre.getText();
-        String apellidoModificado = jTextFieldApellido.getText();
-        String photoModificado = jTextFieldUrl.getText();
+        int id = Integer.valueOf(jTextFieldID.getText()) ;
+        String nombre = jTextFieldNombre.getText();
+        String apellido = jTextFieldApellido.getText();
+        String photo = jTextFieldUrl.getText();
 
-        jsonReader.actualizarJSON(this.posicionArrayList, "firstName", nombreModificado);
-        jsonReader.actualizarJSON(this.posicionArrayList, "lastName", apellidoModificado);
-        jsonReader.actualizarJSON(this.posicionArrayList, "photo", photoModificado);
+        //jsonReader.agregarElemento(id, nombre, apellido, photo);
+        if(jsonReader.agregarElemento(id, nombre, apellido, photo)==true){
+            jsonReader.agregarElemento(id, nombre, apellido, photo);
+            cambiarSwing();
+        }else{
+            JOptionPane.showMessageDialog(null, "ID REPETIDO", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
 
-        cambiarSwing();
+        
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
-    
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        // TODO add your handling code here:
+        cambiarSwing();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
-    public void iniciar() {
-        insertarValoresSwing();
-    }
 
     public void cambiarSwing(){
         this.setVisible(false);
         LecturaJSONUI lecturaJSONUI = new LecturaJSONUI();
        lecturaJSONUI.iniciar();
-    }
-
-    public void insertarValoresSwing() {
-        jLabelid.setText(String.valueOf(empleados.get(posicionArrayList-1).get("id").getAsString()));
-        jTextFieldNombre.setText(empleados.get(posicionArrayList-1).get("firstName").getAsString());
-        jTextFieldApellido.setText(empleados.get(posicionArrayList-1).get("lastName").getAsString());
-        jTextFieldUrl.setText(empleados.get(posicionArrayList-1).get("photo").getAsString());
     }
 
     /**
@@ -237,10 +245,11 @@ public class Actualizar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabelUrl;
-    private static javax.swing.JLabel jLabelfoto;
+    private javax.swing.JLabel jLabelfoto;
     private javax.swing.JLabel jLabelid;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextFieldApellido;
+    private javax.swing.JTextField jTextFieldID;
     private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextFieldUrl;
     // End of variables declaration//GEN-END:variables
