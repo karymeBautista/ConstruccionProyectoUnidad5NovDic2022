@@ -19,7 +19,7 @@ public class LecturaJSONUI extends javax.swing.JFrame {
     EmpleadoJSONParser empleadoJSONParser = new EmpleadoJSONParser();
     ArrayList<JsonObject> empleados = new ArrayList<JsonObject>();
       
-    controllerJSON readJSON = new controllerJSON("C:\\Users\\Usuario\\Desktop\\CLON REPOSITORIOS\\ConstruccionProyectoUnidad5NovDic2022\\Files\\empleados3.json");
+    controllerJSON readJSON = new controllerJSON("C:\\Users\\lucyi\\Downloads\\AGREGARELEMENTO\\ConstruccionProyectoUnidad5NovDic2022\\Files\\empleados3.json");
 
     int paso = 0;
     int posicion=1;
@@ -56,6 +56,7 @@ public class LecturaJSONUI extends javax.swing.JFrame {
         jButtonSiguiente = new javax.swing.JButton();
         jButtonActualizar = new javax.swing.JButton();
         jButtonEliminar = new javax.swing.JButton();
+        jButtonAgregar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,6 +119,15 @@ public class LecturaJSONUI extends javax.swing.JFrame {
             }
         });
 
+        jButtonAgregar.setBackground(new java.awt.Color(102, 255, 51));
+        jButtonAgregar.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
+        jButtonAgregar.setText("Agregar");
+        jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgregarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -146,14 +156,19 @@ public class LecturaJSONUI extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonAnterior)
-                    .addComponent(jButtonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonSiguiente)
-                    .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButtonAnterior)
+                            .addComponent(jButtonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonSiguiente)
+                            .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(128, 128, 128)
+                        .addComponent(jButtonAgregar)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -183,7 +198,9 @@ public class LecturaJSONUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jButtonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonAgregar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -220,8 +237,10 @@ public class LecturaJSONUI extends javax.swing.JFrame {
         int ventanaYesNotCancel = JOptionPane.showConfirmDialog(null, "¿Realmente quieres eliminar al empleado con ID  " + posicion + " ?", "Ventana de Confirmacion", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
 		//0=yes, 1=no, 2=cancel
 		if(ventanaYesNotCancel == 0) {
-            controllerJSON jsonReader = new controllerJSON("C:\\Users\\Usuario\\Desktop\\CLON REPOSITORIOS\\ConstruccionProyectoUnidad5NovDic2022\\Files\\empleados3.json");
+            controllerJSON jsonReader = new controllerJSON("C:\\Users\\lucyi\\Downloads\\AGREGARELEMENTO\\ConstruccionProyectoUnidad5NovDic2022\\Files\\empleados3.json");
+            posicion=empleados.get(paso).get("id").getAsInt();
             jsonReader.eliminarEmpleado(posicion);
+            System.out.println("La Posicion:"+ paso);
 		}else if(ventanaYesNotCancel == 1){
 		    System.out.println("Has indicado que no quieres proseguido con la operación");
 		}else if(ventanaYesNotCancel == 2){
@@ -231,6 +250,14 @@ public class LecturaJSONUI extends javax.swing.JFrame {
         LecturaJSONUI lecturaJSONUI = new LecturaJSONUI();
         lecturaJSONUI.iniciar();
     }//GEN-LAST:event_jButtonEliminarActionPerformed
+
+    private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
+        // TODO add your handling code here:
+        int tamanio=empleados.size()+1;
+        Nuevo nuevo = new Nuevo();
+        this.setVisible(false); 
+        nuevo.setVisible(true);
+    }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void jButtonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButtonSiguienteActionPerformed
 
@@ -351,6 +378,7 @@ public class LecturaJSONUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonActualizar;
+    private javax.swing.JButton jButtonAgregar;
     private javax.swing.JButton jButtonAnterior;
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonSiguiente;
